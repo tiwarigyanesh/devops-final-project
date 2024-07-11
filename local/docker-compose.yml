@@ -26,9 +26,11 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+    env_file:
+      - ../expensy_backend/.env  
+    #environment:
+      #MONGO_INITDB_ROOT_USERNAME: root
+      #MONGO_INITDB_ROOT_PASSWORD: example
       #MONGO_INITDB_DATABASE: expeny
     command: ["mongod", "--bind_ip_all"]
 
@@ -36,8 +38,10 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
-    environment:
-      REDIS_PASSWORD: someredispassword 
+    env_file:
+      - ../expensy_backend/.env    
+    #environment:
+      #REDIS_PASSWORD: someredispassword 
     command: ["redis-server", "--requirepass", "someredispassword"]
 
 volumes:
